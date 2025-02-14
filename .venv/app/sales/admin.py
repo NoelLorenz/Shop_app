@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db import models
-from .models import Orders
+from .models import Odr
 from .models import Orderitems
 
 
@@ -24,4 +24,4 @@ class orderAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return True
 
-admin.site.register(Orders, orderAdmin)
+admin.site.register(Odr, orderAdmin)

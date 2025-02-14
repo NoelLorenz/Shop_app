@@ -9,7 +9,7 @@ from libraries.models import Address, Customers, Products
 
 
 
-class Orders(models.Model):
+class Odr(models.Model):
     DEL_STATUS = [
         (1, 'Delivered'),
         (2, 'Not Delivered'),
@@ -39,7 +39,7 @@ class Orders(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        db_table = 'tbl_orders'
+        db_table = 'tbl_order'
         verbose_name_plural = 'Orders'
         verbose_name = 'Order'
 
@@ -54,13 +54,13 @@ class Orderitems(models.Model):
     ]
 
     oi_id = models.AutoField(db_column='oi_id', primary_key=True, editable=False)
-    oi_order = models.ForeignKey(Orders, db_column='oi_order_id', on_delete=models.CASCADE, null=False, blank=False, default='')
+    oi_order = models.ForeignKey(Odr, db_column='oi_order_id', on_delete=models.CASCADE, null=False, blank=False, default='')
     oi_type = models.ForeignKey(Products, db_column='oi_type', on_delete=models.CASCADE, default=None,  related_name='orderitems_by_name')
     oi_size = models.IntegerField(db_column='oi_size', choices=OITEM_SIZE, default=1)
     oi_qty = models.IntegerField(db_column='io_qty', default=0)
     oi_price = models.DecimalField(db_column='oi_price', max_digits=10, decimal_places=2, null=True, blank=True)
     oi_date = models.DateTimeField(db_column='order_date', blank=True, null=True, auto_now_add=True)
-    oi_status = models.IntegerField(db_column='oi_status', choices=Order.DEL_STATUS, default=1)
+    oi_status = models.IntegerField(db_column='oi_status', choices=Odr.DEL_STATUS, default=1)
 
     def __str__(self):
         return str(self.oi_type)
