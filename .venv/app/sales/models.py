@@ -66,13 +66,11 @@ class Orderitems(models.Model):
         return str(self.oi_type)
 
     def save(self, *args, **kwargs):
-        #store prod_price on a variable
         # if self.oi_type:
         #     poduct_price = self.oi_type.prod_price
         # 
         #     self.oi_price = product_price * self.oi_qty
 
-        # Check if both product and quantity are set
         if self.oi_type and self.oi_qty:
             self.oi_price = self.oi_type.prod_price * self.oi_qty
             

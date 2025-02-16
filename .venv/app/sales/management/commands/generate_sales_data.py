@@ -41,24 +41,24 @@ class Command(BaseCommand):
                 order_buyer_id = order_id_choice,
                 orderpay_method = order_pay_method
             )
-        for order in Odr.objects.all():
-            for i in range(num_orders):
-                items = Products.objects.order_by('?').first()
-                item_size = fake.random_element(elements=[1, 2, 3])
-                item_qty = fake.random_int(min=3, max=9)
-                item_status = fake.random_element(elements=[1, 2])
-                item_size = fake.random_element(elements=[1, 2,3])
+
+            for order in Odr.objects.all():
+                for i in range(num_order_items):
+                    items = Products.objects.order_by('?').first()
+                    item_size = fake.random_element(elements=[1, 2, 3])
+                    item_qty = fake.random_int(min=3, max=9)
+                    item_status = fake.random_element(elements=[1, 2])
+                    item_size = fake.random_element(elements=[1, 2,3])
 
 
-                Orderitems.objects.create(
-                    oi_order    =order,
-                    oi_type     = items,
-                    oi_size     = item_size,
-                    oi_qty      = item_qty,
-                    oi_status   = item_status,
-                )
-                self.stdout.write(
-                    self.style.SUCCESS(f'Created {num_orders} orders with {num_order_items} order_items each.'))
+                    Orderitems.objects.create(
+                        oi_order    = order,
+                        oi_type     = items,
+                        oi_size     = item_size,
+                        oi_qty      = item_qty,
+                        oi_status   = item_status,
+                    )
+                    self.stdout.write(self.style.SUCCESS(f'Created {num_orders} orders with {num_order_items} order_items each.'))
 
             # order_id_choice = fake.random_element(elements=[1, 2, 3])
             # flight_name = dict(Flights.FLIGHT_NAMES).get(flight_name_choice, 'Unknown Airline')
